@@ -1,0 +1,60 @@
+name:                warp-grpc-example
+version:             0.1.0.0
+github:              "githubuser/warp-grpc-example"
+license:             BSD3
+author:              "Author name here"
+maintainer:          "example@example.com"
+copyright:           "2018 Author name here"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/githubuser/warp-grpc-example#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- bytestring
+- containers
+- data-default-class
+- http2-grpc-types
+- lens
+- proto-lens
+- proto-lens-protoc
+- warp
+- warp-grpc >= 0.1.0.2
+- warp-tls
+
+library:
+  source-dirs:
+  - src
+  - gen
+
+executables:
+  warp-grpc-example-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - warp-grpc-example
+
+tests:
+  warp-grpc-example-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - warp-grpc-example
