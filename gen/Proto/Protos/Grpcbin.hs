@@ -6,39 +6,38 @@
 {-# OPTIONS_GHC -fno-warn-unused-imports#-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports#-}
 module Proto.Protos.Grpcbin
-       (GRPCBin(..), DummyMessage(..), DummyMessage'Enum(..),
+       (GRPCBin(..), DummyMessage(), DummyMessage'Enum(..),
         DummyMessage'Enum(), DummyMessage'Enum'UnrecognizedValue,
-        DummyMessage'Sub(..), EmptyMessage(..), HeadersMessage(..),
-        HeadersMessage'MetadataEntry(..), HeadersMessage'Values(..),
-        IndexReply(..), IndexReply'Endpoint(..), SpecificErrorRequest(..))
+        DummyMessage'Sub(), EmptyMessage(), HeadersMessage(),
+        HeadersMessage'MetadataEntry(), HeadersMessage'Values(),
+        IndexReply(), IndexReply'Endpoint(), SpecificErrorRequest())
        where
-import qualified Data.ProtoLens.Reexport.Lens.Labels.Prism
+import qualified Data.ProtoLens.Runtime.Control.DeepSeq
+       as Control.DeepSeq
+import qualified Data.ProtoLens.Runtime.Lens.Labels.Prism
        as Lens.Labels.Prism
-import qualified Data.ProtoLens.Reexport.Prelude as Prelude
-import qualified Data.ProtoLens.Reexport.Data.Int as Data.Int
-import qualified Data.ProtoLens.Reexport.Data.Word as Data.Word
-import qualified Data.ProtoLens.Reexport.Data.ProtoLens
+import qualified Data.ProtoLens.Runtime.Prelude as Prelude
+import qualified Data.ProtoLens.Runtime.Data.Int as Data.Int
+import qualified Data.ProtoLens.Runtime.Data.Word as Data.Word
+import qualified Data.ProtoLens.Runtime.Data.ProtoLens
        as Data.ProtoLens
-import qualified
-       Data.ProtoLens.Reexport.Data.ProtoLens.Message.Enum
+import qualified Data.ProtoLens.Runtime.Data.ProtoLens.Message.Enum
        as Data.ProtoLens.Message.Enum
 import qualified
-       Data.ProtoLens.Reexport.Data.ProtoLens.Service.Types
+       Data.ProtoLens.Runtime.Data.ProtoLens.Service.Types
        as Data.ProtoLens.Service.Types
-import qualified Data.ProtoLens.Reexport.Lens.Family2
+import qualified Data.ProtoLens.Runtime.Lens.Family2
        as Lens.Family2
-import qualified Data.ProtoLens.Reexport.Lens.Family2.Unchecked
+import qualified Data.ProtoLens.Runtime.Lens.Family2.Unchecked
        as Lens.Family2.Unchecked
-import qualified Data.ProtoLens.Reexport.Data.Default.Class
-       as Data.Default.Class
-import qualified Data.ProtoLens.Reexport.Data.Text as Data.Text
-import qualified Data.ProtoLens.Reexport.Data.Map as Data.Map
-import qualified Data.ProtoLens.Reexport.Data.ByteString
+import qualified Data.ProtoLens.Runtime.Data.Text as Data.Text
+import qualified Data.ProtoLens.Runtime.Data.Map as Data.Map
+import qualified Data.ProtoLens.Runtime.Data.ByteString
        as Data.ByteString
-import qualified Data.ProtoLens.Reexport.Data.ByteString.Char8
+import qualified Data.ProtoLens.Runtime.Data.ByteString.Char8
        as Data.ByteString.Char8
-import qualified Data.ProtoLens.Reexport.Lens.Labels as Lens.Labels
-import qualified Data.ProtoLens.Reexport.Text.Read as Text.Read
+import qualified Data.ProtoLens.Runtime.Lens.Labels as Lens.Labels
+import qualified Data.ProtoLens.Runtime.Text.Read as Text.Read
 
 {- | Fields :
 
@@ -78,69 +77,69 @@ data DummyMessage = DummyMessage{_DummyMessage'fString ::
                                  _DummyMessage'fFloat :: !Prelude.Float,
                                  _DummyMessage'fFloats :: ![Prelude.Float],
                                  _DummyMessage'_unknownFields :: !Data.ProtoLens.FieldSet}
-                      deriving (Prelude.Show, Prelude.Eq, Prelude.Ord)
-instance (Lens.Labels.HasLens' f DummyMessage x a, a ~ b) =>
-         Lens.Labels.HasLens f DummyMessage DummyMessage x a b
-         where
-        lensOf = Lens.Labels.lensOf'
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fString" (Data.Text.Text)
+                      deriving (Prelude.Eq, Prelude.Ord)
+instance Prelude.Show DummyMessage where
+        showsPrec _ __x __s
+          = Prelude.showChar '{'
+              (Prelude.showString (Data.ProtoLens.showMessageShort __x)
+                 (Prelude.showChar '}' __s))
+instance Lens.Labels.HasLens' DummyMessage "fString"
+           (Data.Text.Text)
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fString
                  (\ x__ y__ -> x__{_DummyMessage'fString = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fStrings" ([Data.Text.Text])
+instance Lens.Labels.HasLens' DummyMessage "fStrings"
+           ([Data.Text.Text])
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fStrings
                  (\ x__ y__ -> x__{_DummyMessage'fStrings = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fInt32" (Data.Int.Int32)
+instance Lens.Labels.HasLens' DummyMessage "fInt32"
+           (Data.Int.Int32)
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fInt32
                  (\ x__ y__ -> x__{_DummyMessage'fInt32 = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fInt32s" ([Data.Int.Int32])
+instance Lens.Labels.HasLens' DummyMessage "fInt32s"
+           ([Data.Int.Int32])
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fInt32s
                  (\ x__ y__ -> x__{_DummyMessage'fInt32s = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fEnum" (DummyMessage'Enum)
+instance Lens.Labels.HasLens' DummyMessage "fEnum"
+           (DummyMessage'Enum)
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fEnum
                  (\ x__ y__ -> x__{_DummyMessage'fEnum = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fEnums" ([DummyMessage'Enum])
+instance Lens.Labels.HasLens' DummyMessage "fEnums"
+           ([DummyMessage'Enum])
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fEnums
                  (\ x__ y__ -> x__{_DummyMessage'fEnums = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fSub" (DummyMessage'Sub)
+instance Lens.Labels.HasLens' DummyMessage "fSub"
+           (DummyMessage'Sub)
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fSub
                  (\ x__ y__ -> x__{_DummyMessage'fSub = y__}))
-              (Data.ProtoLens.maybeLens Data.Default.Class.def)
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "maybe'fSub"
+              (Data.ProtoLens.maybeLens Data.ProtoLens.defMessage)
+instance Lens.Labels.HasLens' DummyMessage "maybe'fSub"
            (Prelude.Maybe DummyMessage'Sub)
          where
         lensOf' _
@@ -148,48 +147,46 @@ instance Prelude.Functor f =>
               (Lens.Family2.Unchecked.lens _DummyMessage'fSub
                  (\ x__ y__ -> x__{_DummyMessage'fSub = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fSubs" ([DummyMessage'Sub])
+instance Lens.Labels.HasLens' DummyMessage "fSubs"
+           ([DummyMessage'Sub])
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fSubs
                  (\ x__ y__ -> x__{_DummyMessage'fSubs = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fBool" (Prelude.Bool)
+instance Lens.Labels.HasLens' DummyMessage "fBool" (Prelude.Bool)
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fBool
                  (\ x__ y__ -> x__{_DummyMessage'fBool = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fBools" ([Prelude.Bool])
+instance Lens.Labels.HasLens' DummyMessage "fBools"
+           ([Prelude.Bool])
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fBools
                  (\ x__ y__ -> x__{_DummyMessage'fBools = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fInt64" (Data.Int.Int64)
+instance Lens.Labels.HasLens' DummyMessage "fInt64"
+           (Data.Int.Int64)
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fInt64
                  (\ x__ y__ -> x__{_DummyMessage'fInt64 = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fInt64s" ([Data.Int.Int64])
+instance Lens.Labels.HasLens' DummyMessage "fInt64s"
+           ([Data.Int.Int64])
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fInt64s
                  (\ x__ y__ -> x__{_DummyMessage'fInt64s = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fBytes"
+instance Lens.Labels.HasLens' DummyMessage "fBytes"
            (Data.ByteString.ByteString)
          where
         lensOf' _
@@ -197,8 +194,7 @@ instance Prelude.Functor f =>
               (Lens.Family2.Unchecked.lens _DummyMessage'fBytes
                  (\ x__ y__ -> x__{_DummyMessage'fBytes = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fBytess"
+instance Lens.Labels.HasLens' DummyMessage "fBytess"
            ([Data.ByteString.ByteString])
          where
         lensOf' _
@@ -206,39 +202,21 @@ instance Prelude.Functor f =>
               (Lens.Family2.Unchecked.lens _DummyMessage'fBytess
                  (\ x__ y__ -> x__{_DummyMessage'fBytess = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fFloat" (Prelude.Float)
+instance Lens.Labels.HasLens' DummyMessage "fFloat" (Prelude.Float)
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fFloat
                  (\ x__ y__ -> x__{_DummyMessage'fFloat = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage "fFloats" ([Prelude.Float])
+instance Lens.Labels.HasLens' DummyMessage "fFloats"
+           ([Prelude.Float])
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'fFloats
                  (\ x__ y__ -> x__{_DummyMessage'fFloats = y__}))
               Prelude.id
-instance Data.Default.Class.Default DummyMessage where
-        def
-          = DummyMessage{_DummyMessage'fString = Data.ProtoLens.fieldDefault,
-                         _DummyMessage'fStrings = [],
-                         _DummyMessage'fInt32 = Data.ProtoLens.fieldDefault,
-                         _DummyMessage'fInt32s = [],
-                         _DummyMessage'fEnum = Data.Default.Class.def,
-                         _DummyMessage'fEnums = [], _DummyMessage'fSub = Prelude.Nothing,
-                         _DummyMessage'fSubs = [],
-                         _DummyMessage'fBool = Data.ProtoLens.fieldDefault,
-                         _DummyMessage'fBools = [],
-                         _DummyMessage'fInt64 = Data.ProtoLens.fieldDefault,
-                         _DummyMessage'fInt64s = [],
-                         _DummyMessage'fBytes = Data.ProtoLens.fieldDefault,
-                         _DummyMessage'fBytess = [],
-                         _DummyMessage'fFloat = Data.ProtoLens.fieldDefault,
-                         _DummyMessage'fFloats = [], _DummyMessage'_unknownFields = ([])}
 instance Data.ProtoLens.Message DummyMessage where
         messageName _ = Data.Text.pack "grpcbin.DummyMessage"
         fieldsByTag
@@ -247,7 +225,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.StringField ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Text.Text)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fString")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fStrings__field_descriptor
@@ -255,7 +233,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.StringField ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Text.Text)
                       (Data.ProtoLens.RepeatedField Data.ProtoLens.Unpacked
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fStrings")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fInt32__field_descriptor
@@ -263,7 +241,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.Int32Field ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Int.Int32)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fInt32")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fInt32s__field_descriptor
@@ -271,7 +249,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.Int32Field ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Int.Int32)
                       (Data.ProtoLens.RepeatedField Data.ProtoLens.Packed
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fInt32s")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fEnum__field_descriptor
@@ -279,7 +257,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.EnumField ::
                          Data.ProtoLens.FieldTypeDescriptor DummyMessage'Enum)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fEnum")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fEnums__field_descriptor
@@ -287,7 +265,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.EnumField ::
                          Data.ProtoLens.FieldTypeDescriptor DummyMessage'Enum)
                       (Data.ProtoLens.RepeatedField Data.ProtoLens.Packed
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fEnums")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fSub__field_descriptor
@@ -295,7 +273,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.MessageField Data.ProtoLens.MessageType ::
                          Data.ProtoLens.FieldTypeDescriptor DummyMessage'Sub)
                       (Data.ProtoLens.OptionalField
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "maybe'fSub")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fSubs__field_descriptor
@@ -303,7 +281,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.MessageField Data.ProtoLens.MessageType ::
                          Data.ProtoLens.FieldTypeDescriptor DummyMessage'Sub)
                       (Data.ProtoLens.RepeatedField Data.ProtoLens.Unpacked
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fSubs")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fBool__field_descriptor
@@ -311,7 +289,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.BoolField ::
                          Data.ProtoLens.FieldTypeDescriptor Prelude.Bool)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fBool")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fBools__field_descriptor
@@ -319,7 +297,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.BoolField ::
                          Data.ProtoLens.FieldTypeDescriptor Prelude.Bool)
                       (Data.ProtoLens.RepeatedField Data.ProtoLens.Packed
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fBools")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fInt64__field_descriptor
@@ -327,7 +305,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.Int64Field ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Int.Int64)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fInt64")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fInt64s__field_descriptor
@@ -335,7 +313,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.Int64Field ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Int.Int64)
                       (Data.ProtoLens.RepeatedField Data.ProtoLens.Packed
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fInt64s")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fBytes__field_descriptor
@@ -343,7 +321,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.BytesField ::
                          Data.ProtoLens.FieldTypeDescriptor Data.ByteString.ByteString)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fBytes")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fBytess__field_descriptor
@@ -351,7 +329,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.BytesField ::
                          Data.ProtoLens.FieldTypeDescriptor Data.ByteString.ByteString)
                       (Data.ProtoLens.RepeatedField Data.ProtoLens.Unpacked
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fBytess")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fFloat__field_descriptor
@@ -359,7 +337,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.FloatField ::
                          Data.ProtoLens.FieldTypeDescriptor Prelude.Float)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fFloat")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
                 fFloats__field_descriptor
@@ -367,7 +345,7 @@ instance Data.ProtoLens.Message DummyMessage where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.FloatField ::
                          Data.ProtoLens.FieldTypeDescriptor Prelude.Float)
                       (Data.ProtoLens.RepeatedField Data.ProtoLens.Packed
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fFloats")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage
               in
@@ -391,6 +369,48 @@ instance Data.ProtoLens.Message DummyMessage where
         unknownFields
           = Lens.Family2.Unchecked.lens _DummyMessage'_unknownFields
               (\ x__ y__ -> x__{_DummyMessage'_unknownFields = y__})
+        defMessage
+          = DummyMessage{_DummyMessage'fString = Data.ProtoLens.fieldDefault,
+                         _DummyMessage'fStrings = [],
+                         _DummyMessage'fInt32 = Data.ProtoLens.fieldDefault,
+                         _DummyMessage'fInt32s = [],
+                         _DummyMessage'fEnum = Data.ProtoLens.fieldDefault,
+                         _DummyMessage'fEnums = [], _DummyMessage'fSub = Prelude.Nothing,
+                         _DummyMessage'fSubs = [],
+                         _DummyMessage'fBool = Data.ProtoLens.fieldDefault,
+                         _DummyMessage'fBools = [],
+                         _DummyMessage'fInt64 = Data.ProtoLens.fieldDefault,
+                         _DummyMessage'fInt64s = [],
+                         _DummyMessage'fBytes = Data.ProtoLens.fieldDefault,
+                         _DummyMessage'fBytess = [],
+                         _DummyMessage'fFloat = Data.ProtoLens.fieldDefault,
+                         _DummyMessage'fFloats = [], _DummyMessage'_unknownFields = ([])}
+instance Control.DeepSeq.NFData DummyMessage where
+        rnf
+          = \ x__ ->
+              Control.DeepSeq.deepseq (_DummyMessage'_unknownFields x__)
+                (Control.DeepSeq.deepseq (_DummyMessage'fString x__)
+                   (Control.DeepSeq.deepseq (_DummyMessage'fStrings x__)
+                      (Control.DeepSeq.deepseq (_DummyMessage'fInt32 x__)
+                         (Control.DeepSeq.deepseq (_DummyMessage'fInt32s x__)
+                            (Control.DeepSeq.deepseq (_DummyMessage'fEnum x__)
+                               (Control.DeepSeq.deepseq (_DummyMessage'fEnums x__)
+                                  (Control.DeepSeq.deepseq (_DummyMessage'fSub x__)
+                                     (Control.DeepSeq.deepseq (_DummyMessage'fSubs x__)
+                                        (Control.DeepSeq.deepseq (_DummyMessage'fBool x__)
+                                           (Control.DeepSeq.deepseq (_DummyMessage'fBools x__)
+                                              (Control.DeepSeq.deepseq (_DummyMessage'fInt64 x__)
+                                                 (Control.DeepSeq.deepseq
+                                                    (_DummyMessage'fInt64s x__)
+                                                    (Control.DeepSeq.deepseq
+                                                       (_DummyMessage'fBytes x__)
+                                                       (Control.DeepSeq.deepseq
+                                                          (_DummyMessage'fBytess x__)
+                                                          (Control.DeepSeq.deepseq
+                                                             (_DummyMessage'fFloat x__)
+                                                             (Control.DeepSeq.deepseq
+                                                                (_DummyMessage'fFloats x__)
+                                                                (())))))))))))))))))
 data DummyMessage'Enum = DummyMessage'ENUM_0
                        | DummyMessage'ENUM_1
                        | DummyMessage'ENUM_2
@@ -456,10 +476,10 @@ instance Prelude.Enum DummyMessage'Enum where
         enumFromTo = Data.ProtoLens.Message.Enum.messageEnumFromTo
         enumFromThen = Data.ProtoLens.Message.Enum.messageEnumFromThen
         enumFromThenTo = Data.ProtoLens.Message.Enum.messageEnumFromThenTo
-instance Data.Default.Class.Default DummyMessage'Enum where
-        def = DummyMessage'ENUM_0
 instance Data.ProtoLens.FieldDefault DummyMessage'Enum where
         fieldDefault = DummyMessage'ENUM_0
+instance Control.DeepSeq.NFData DummyMessage'Enum where
+        rnf x__ = Prelude.seq x__ (())
 {- | Fields :
 
     * 'Proto.Protos.Grpcbin_Fields.fString' @:: Lens' DummyMessage'Sub Data.Text.Text@
@@ -468,24 +488,20 @@ data DummyMessage'Sub = DummyMessage'Sub{_DummyMessage'Sub'fString
                                          :: !Data.Text.Text,
                                          _DummyMessage'Sub'_unknownFields ::
                                          !Data.ProtoLens.FieldSet}
-                          deriving (Prelude.Show, Prelude.Eq, Prelude.Ord)
-instance (Lens.Labels.HasLens' f DummyMessage'Sub x a, a ~ b) =>
-         Lens.Labels.HasLens f DummyMessage'Sub DummyMessage'Sub x a b
-         where
-        lensOf = Lens.Labels.lensOf'
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f DummyMessage'Sub "fString" (Data.Text.Text)
+                          deriving (Prelude.Eq, Prelude.Ord)
+instance Prelude.Show DummyMessage'Sub where
+        showsPrec _ __x __s
+          = Prelude.showChar '{'
+              (Prelude.showString (Data.ProtoLens.showMessageShort __x)
+                 (Prelude.showChar '}' __s))
+instance Lens.Labels.HasLens' DummyMessage'Sub "fString"
+           (Data.Text.Text)
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _DummyMessage'Sub'fString
                  (\ x__ y__ -> x__{_DummyMessage'Sub'fString = y__}))
               Prelude.id
-instance Data.Default.Class.Default DummyMessage'Sub where
-        def
-          = DummyMessage'Sub{_DummyMessage'Sub'fString =
-                               Data.ProtoLens.fieldDefault,
-                             _DummyMessage'Sub'_unknownFields = ([])}
 instance Data.ProtoLens.Message DummyMessage'Sub where
         messageName _ = Data.Text.pack "grpcbin.DummyMessage.Sub"
         fieldsByTag
@@ -494,7 +510,7 @@ instance Data.ProtoLens.Message DummyMessage'Sub where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.StringField ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Text.Text)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "fString")))
                       :: Data.ProtoLens.FieldDescriptor DummyMessage'Sub
               in
@@ -503,24 +519,37 @@ instance Data.ProtoLens.Message DummyMessage'Sub where
         unknownFields
           = Lens.Family2.Unchecked.lens _DummyMessage'Sub'_unknownFields
               (\ x__ y__ -> x__{_DummyMessage'Sub'_unknownFields = y__})
+        defMessage
+          = DummyMessage'Sub{_DummyMessage'Sub'fString =
+                               Data.ProtoLens.fieldDefault,
+                             _DummyMessage'Sub'_unknownFields = ([])}
+instance Control.DeepSeq.NFData DummyMessage'Sub where
+        rnf
+          = \ x__ ->
+              Control.DeepSeq.deepseq (_DummyMessage'Sub'_unknownFields x__)
+                (Control.DeepSeq.deepseq (_DummyMessage'Sub'fString x__) (()))
 {- | Fields :
 
  -}
 data EmptyMessage = EmptyMessage{_EmptyMessage'_unknownFields ::
                                  !Data.ProtoLens.FieldSet}
-                      deriving (Prelude.Show, Prelude.Eq, Prelude.Ord)
-instance (Lens.Labels.HasLens' f EmptyMessage x a, a ~ b) =>
-         Lens.Labels.HasLens f EmptyMessage EmptyMessage x a b
-         where
-        lensOf = Lens.Labels.lensOf'
-instance Data.Default.Class.Default EmptyMessage where
-        def = EmptyMessage{_EmptyMessage'_unknownFields = ([])}
+                      deriving (Prelude.Eq, Prelude.Ord)
+instance Prelude.Show EmptyMessage where
+        showsPrec _ __x __s
+          = Prelude.showChar '{'
+              (Prelude.showString (Data.ProtoLens.showMessageShort __x)
+                 (Prelude.showChar '}' __s))
 instance Data.ProtoLens.Message EmptyMessage where
         messageName _ = Data.Text.pack "grpcbin.EmptyMessage"
         fieldsByTag = let in Data.Map.fromList []
         unknownFields
           = Lens.Family2.Unchecked.lens _EmptyMessage'_unknownFields
               (\ x__ y__ -> x__{_EmptyMessage'_unknownFields = y__})
+        defMessage = EmptyMessage{_EmptyMessage'_unknownFields = ([])}
+instance Control.DeepSeq.NFData EmptyMessage where
+        rnf
+          = \ x__ ->
+              Control.DeepSeq.deepseq (_EmptyMessage'_unknownFields x__) (())
 {- | Fields :
 
     * 'Proto.Protos.Grpcbin_Fields.metadata' @:: Lens' HeadersMessage
@@ -529,13 +558,13 @@ instance Data.ProtoLens.Message EmptyMessage where
 data HeadersMessage = HeadersMessage{_HeadersMessage'metadata ::
                                      !(Data.Map.Map Data.Text.Text HeadersMessage'Values),
                                      _HeadersMessage'_unknownFields :: !Data.ProtoLens.FieldSet}
-                        deriving (Prelude.Show, Prelude.Eq, Prelude.Ord)
-instance (Lens.Labels.HasLens' f HeadersMessage x a, a ~ b) =>
-         Lens.Labels.HasLens f HeadersMessage HeadersMessage x a b
-         where
-        lensOf = Lens.Labels.lensOf'
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f HeadersMessage "metadata"
+                        deriving (Prelude.Eq, Prelude.Ord)
+instance Prelude.Show HeadersMessage where
+        showsPrec _ __x __s
+          = Prelude.showChar '{'
+              (Prelude.showString (Data.ProtoLens.showMessageShort __x)
+                 (Prelude.showChar '}' __s))
+instance Lens.Labels.HasLens' HeadersMessage "metadata"
            (Data.Map.Map Data.Text.Text HeadersMessage'Values)
          where
         lensOf' _
@@ -543,10 +572,6 @@ instance Prelude.Functor f =>
               (Lens.Family2.Unchecked.lens _HeadersMessage'metadata
                  (\ x__ y__ -> x__{_HeadersMessage'metadata = y__}))
               Prelude.id
-instance Data.Default.Class.Default HeadersMessage where
-        def
-          = HeadersMessage{_HeadersMessage'metadata = Data.Map.empty,
-                           _HeadersMessage'_unknownFields = ([])}
 instance Data.ProtoLens.Message HeadersMessage where
         messageName _ = Data.Text.pack "grpcbin.HeadersMessage"
         fieldsByTag
@@ -555,11 +580,11 @@ instance Data.ProtoLens.Message HeadersMessage where
                       (Data.ProtoLens.MessageField Data.ProtoLens.MessageType ::
                          Data.ProtoLens.FieldTypeDescriptor HeadersMessage'MetadataEntry)
                       (Data.ProtoLens.MapField
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "key"))
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "value"))
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "metadata")))
                       :: Data.ProtoLens.FieldDescriptor HeadersMessage
               in
@@ -568,6 +593,14 @@ instance Data.ProtoLens.Message HeadersMessage where
         unknownFields
           = Lens.Family2.Unchecked.lens _HeadersMessage'_unknownFields
               (\ x__ y__ -> x__{_HeadersMessage'_unknownFields = y__})
+        defMessage
+          = HeadersMessage{_HeadersMessage'metadata = Data.Map.empty,
+                           _HeadersMessage'_unknownFields = ([])}
+instance Control.DeepSeq.NFData HeadersMessage where
+        rnf
+          = \ x__ ->
+              Control.DeepSeq.deepseq (_HeadersMessage'_unknownFields x__)
+                (Control.DeepSeq.deepseq (_HeadersMessage'metadata x__) (()))
 {- | Fields :
 
     * 'Proto.Protos.Grpcbin_Fields.key' @:: Lens' HeadersMessage'MetadataEntry Data.Text.Text@
@@ -583,18 +616,13 @@ data HeadersMessage'MetadataEntry = HeadersMessage'MetadataEntry{_HeadersMessage
                                                                      HeadersMessage'Values),
                                                                  _HeadersMessage'MetadataEntry'_unknownFields
                                                                  :: !Data.ProtoLens.FieldSet}
-                                      deriving (Prelude.Show, Prelude.Eq, Prelude.Ord)
-instance (Lens.Labels.HasLens' f HeadersMessage'MetadataEntry x a,
-          a ~ b) =>
-         Lens.Labels.HasLens f HeadersMessage'MetadataEntry
-           HeadersMessage'MetadataEntry
-           x
-           a
-           b
-         where
-        lensOf = Lens.Labels.lensOf'
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f HeadersMessage'MetadataEntry "key"
+                                      deriving (Prelude.Eq, Prelude.Ord)
+instance Prelude.Show HeadersMessage'MetadataEntry where
+        showsPrec _ __x __s
+          = Prelude.showChar '{'
+              (Prelude.showString (Data.ProtoLens.showMessageShort __x)
+                 (Prelude.showChar '}' __s))
+instance Lens.Labels.HasLens' HeadersMessage'MetadataEntry "key"
            (Data.Text.Text)
          where
         lensOf' _
@@ -602,17 +630,16 @@ instance Prelude.Functor f =>
               (Lens.Family2.Unchecked.lens _HeadersMessage'MetadataEntry'key
                  (\ x__ y__ -> x__{_HeadersMessage'MetadataEntry'key = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f HeadersMessage'MetadataEntry "value"
+instance Lens.Labels.HasLens' HeadersMessage'MetadataEntry "value"
            (HeadersMessage'Values)
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _HeadersMessage'MetadataEntry'value
                  (\ x__ y__ -> x__{_HeadersMessage'MetadataEntry'value = y__}))
-              (Data.ProtoLens.maybeLens Data.Default.Class.def)
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f HeadersMessage'MetadataEntry "maybe'value"
+              (Data.ProtoLens.maybeLens Data.ProtoLens.defMessage)
+instance Lens.Labels.HasLens' HeadersMessage'MetadataEntry
+           "maybe'value"
            (Prelude.Maybe HeadersMessage'Values)
          where
         lensOf' _
@@ -620,13 +647,6 @@ instance Prelude.Functor f =>
               (Lens.Family2.Unchecked.lens _HeadersMessage'MetadataEntry'value
                  (\ x__ y__ -> x__{_HeadersMessage'MetadataEntry'value = y__}))
               Prelude.id
-instance Data.Default.Class.Default HeadersMessage'MetadataEntry
-         where
-        def
-          = HeadersMessage'MetadataEntry{_HeadersMessage'MetadataEntry'key =
-                                           Data.ProtoLens.fieldDefault,
-                                         _HeadersMessage'MetadataEntry'value = Prelude.Nothing,
-                                         _HeadersMessage'MetadataEntry'_unknownFields = ([])}
 instance Data.ProtoLens.Message HeadersMessage'MetadataEntry where
         messageName _
           = Data.Text.pack "grpcbin.HeadersMessage.MetadataEntry"
@@ -636,7 +656,7 @@ instance Data.ProtoLens.Message HeadersMessage'MetadataEntry where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.StringField ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Text.Text)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "key")))
                       :: Data.ProtoLens.FieldDescriptor HeadersMessage'MetadataEntry
                 value__field_descriptor
@@ -644,7 +664,7 @@ instance Data.ProtoLens.Message HeadersMessage'MetadataEntry where
                       (Data.ProtoLens.MessageField Data.ProtoLens.MessageType ::
                          Data.ProtoLens.FieldTypeDescriptor HeadersMessage'Values)
                       (Data.ProtoLens.OptionalField
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "maybe'value")))
                       :: Data.ProtoLens.FieldDescriptor HeadersMessage'MetadataEntry
               in
@@ -656,6 +676,19 @@ instance Data.ProtoLens.Message HeadersMessage'MetadataEntry where
               _HeadersMessage'MetadataEntry'_unknownFields
               (\ x__ y__ ->
                  x__{_HeadersMessage'MetadataEntry'_unknownFields = y__})
+        defMessage
+          = HeadersMessage'MetadataEntry{_HeadersMessage'MetadataEntry'key =
+                                           Data.ProtoLens.fieldDefault,
+                                         _HeadersMessage'MetadataEntry'value = Prelude.Nothing,
+                                         _HeadersMessage'MetadataEntry'_unknownFields = ([])}
+instance Control.DeepSeq.NFData HeadersMessage'MetadataEntry where
+        rnf
+          = \ x__ ->
+              Control.DeepSeq.deepseq
+                (_HeadersMessage'MetadataEntry'_unknownFields x__)
+                (Control.DeepSeq.deepseq (_HeadersMessage'MetadataEntry'key x__)
+                   (Control.DeepSeq.deepseq (_HeadersMessage'MetadataEntry'value x__)
+                      (())))
 {- | Fields :
 
     * 'Proto.Protos.Grpcbin_Fields.values' @:: Lens' HeadersMessage'Values [Data.Text.Text]@
@@ -664,16 +697,13 @@ data HeadersMessage'Values = HeadersMessage'Values{_HeadersMessage'Values'values
                                                    :: ![Data.Text.Text],
                                                    _HeadersMessage'Values'_unknownFields ::
                                                    !Data.ProtoLens.FieldSet}
-                               deriving (Prelude.Show, Prelude.Eq, Prelude.Ord)
-instance (Lens.Labels.HasLens' f HeadersMessage'Values x a,
-          a ~ b) =>
-         Lens.Labels.HasLens f HeadersMessage'Values HeadersMessage'Values x
-           a
-           b
-         where
-        lensOf = Lens.Labels.lensOf'
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f HeadersMessage'Values "values"
+                               deriving (Prelude.Eq, Prelude.Ord)
+instance Prelude.Show HeadersMessage'Values where
+        showsPrec _ __x __s
+          = Prelude.showChar '{'
+              (Prelude.showString (Data.ProtoLens.showMessageShort __x)
+                 (Prelude.showChar '}' __s))
+instance Lens.Labels.HasLens' HeadersMessage'Values "values"
            ([Data.Text.Text])
          where
         lensOf' _
@@ -681,10 +711,6 @@ instance Prelude.Functor f =>
               (Lens.Family2.Unchecked.lens _HeadersMessage'Values'values
                  (\ x__ y__ -> x__{_HeadersMessage'Values'values = y__}))
               Prelude.id
-instance Data.Default.Class.Default HeadersMessage'Values where
-        def
-          = HeadersMessage'Values{_HeadersMessage'Values'values = [],
-                                  _HeadersMessage'Values'_unknownFields = ([])}
 instance Data.ProtoLens.Message HeadersMessage'Values where
         messageName _ = Data.Text.pack "grpcbin.HeadersMessage.Values"
         fieldsByTag
@@ -693,7 +719,7 @@ instance Data.ProtoLens.Message HeadersMessage'Values where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.StringField ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Text.Text)
                       (Data.ProtoLens.RepeatedField Data.ProtoLens.Unpacked
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "values")))
                       :: Data.ProtoLens.FieldDescriptor HeadersMessage'Values
               in
@@ -702,6 +728,14 @@ instance Data.ProtoLens.Message HeadersMessage'Values where
         unknownFields
           = Lens.Family2.Unchecked.lens _HeadersMessage'Values'_unknownFields
               (\ x__ y__ -> x__{_HeadersMessage'Values'_unknownFields = y__})
+        defMessage
+          = HeadersMessage'Values{_HeadersMessage'Values'values = [],
+                                  _HeadersMessage'Values'_unknownFields = ([])}
+instance Control.DeepSeq.NFData HeadersMessage'Values where
+        rnf
+          = \ x__ ->
+              Control.DeepSeq.deepseq (_HeadersMessage'Values'_unknownFields x__)
+                (Control.DeepSeq.deepseq (_HeadersMessage'Values'values x__) (()))
 {- | Fields :
 
     * 'Proto.Protos.Grpcbin_Fields.description' @:: Lens' IndexReply Data.Text.Text@
@@ -711,21 +745,21 @@ data IndexReply = IndexReply{_IndexReply'description ::
                              !Data.Text.Text,
                              _IndexReply'endpoints :: ![IndexReply'Endpoint],
                              _IndexReply'_unknownFields :: !Data.ProtoLens.FieldSet}
-                    deriving (Prelude.Show, Prelude.Eq, Prelude.Ord)
-instance (Lens.Labels.HasLens' f IndexReply x a, a ~ b) =>
-         Lens.Labels.HasLens f IndexReply IndexReply x a b
-         where
-        lensOf = Lens.Labels.lensOf'
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f IndexReply "description" (Data.Text.Text)
+                    deriving (Prelude.Eq, Prelude.Ord)
+instance Prelude.Show IndexReply where
+        showsPrec _ __x __s
+          = Prelude.showChar '{'
+              (Prelude.showString (Data.ProtoLens.showMessageShort __x)
+                 (Prelude.showChar '}' __s))
+instance Lens.Labels.HasLens' IndexReply "description"
+           (Data.Text.Text)
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _IndexReply'description
                  (\ x__ y__ -> x__{_IndexReply'description = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f IndexReply "endpoints"
+instance Lens.Labels.HasLens' IndexReply "endpoints"
            ([IndexReply'Endpoint])
          where
         lensOf' _
@@ -733,10 +767,6 @@ instance Prelude.Functor f =>
               (Lens.Family2.Unchecked.lens _IndexReply'endpoints
                  (\ x__ y__ -> x__{_IndexReply'endpoints = y__}))
               Prelude.id
-instance Data.Default.Class.Default IndexReply where
-        def
-          = IndexReply{_IndexReply'description = Data.ProtoLens.fieldDefault,
-                       _IndexReply'endpoints = [], _IndexReply'_unknownFields = ([])}
 instance Data.ProtoLens.Message IndexReply where
         messageName _ = Data.Text.pack "grpcbin.IndexReply"
         fieldsByTag
@@ -745,7 +775,7 @@ instance Data.ProtoLens.Message IndexReply where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.StringField ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Text.Text)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "description")))
                       :: Data.ProtoLens.FieldDescriptor IndexReply
                 endpoints__field_descriptor
@@ -753,7 +783,7 @@ instance Data.ProtoLens.Message IndexReply where
                       (Data.ProtoLens.MessageField Data.ProtoLens.MessageType ::
                          Data.ProtoLens.FieldTypeDescriptor IndexReply'Endpoint)
                       (Data.ProtoLens.RepeatedField Data.ProtoLens.Unpacked
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "endpoints")))
                       :: Data.ProtoLens.FieldDescriptor IndexReply
               in
@@ -763,6 +793,15 @@ instance Data.ProtoLens.Message IndexReply where
         unknownFields
           = Lens.Family2.Unchecked.lens _IndexReply'_unknownFields
               (\ x__ y__ -> x__{_IndexReply'_unknownFields = y__})
+        defMessage
+          = IndexReply{_IndexReply'description = Data.ProtoLens.fieldDefault,
+                       _IndexReply'endpoints = [], _IndexReply'_unknownFields = ([])}
+instance Control.DeepSeq.NFData IndexReply where
+        rnf
+          = \ x__ ->
+              Control.DeepSeq.deepseq (_IndexReply'_unknownFields x__)
+                (Control.DeepSeq.deepseq (_IndexReply'description x__)
+                   (Control.DeepSeq.deepseq (_IndexReply'endpoints x__) (())))
 {- | Fields :
 
     * 'Proto.Protos.Grpcbin_Fields.path' @:: Lens' IndexReply'Endpoint Data.Text.Text@
@@ -773,21 +812,21 @@ data IndexReply'Endpoint = IndexReply'Endpoint{_IndexReply'Endpoint'path
                                                _IndexReply'Endpoint'description :: !Data.Text.Text,
                                                _IndexReply'Endpoint'_unknownFields ::
                                                !Data.ProtoLens.FieldSet}
-                             deriving (Prelude.Show, Prelude.Eq, Prelude.Ord)
-instance (Lens.Labels.HasLens' f IndexReply'Endpoint x a, a ~ b) =>
-         Lens.Labels.HasLens f IndexReply'Endpoint IndexReply'Endpoint x a b
-         where
-        lensOf = Lens.Labels.lensOf'
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f IndexReply'Endpoint "path" (Data.Text.Text)
+                             deriving (Prelude.Eq, Prelude.Ord)
+instance Prelude.Show IndexReply'Endpoint where
+        showsPrec _ __x __s
+          = Prelude.showChar '{'
+              (Prelude.showString (Data.ProtoLens.showMessageShort __x)
+                 (Prelude.showChar '}' __s))
+instance Lens.Labels.HasLens' IndexReply'Endpoint "path"
+           (Data.Text.Text)
          where
         lensOf' _
           = (Prelude..)
               (Lens.Family2.Unchecked.lens _IndexReply'Endpoint'path
                  (\ x__ y__ -> x__{_IndexReply'Endpoint'path = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f IndexReply'Endpoint "description"
+instance Lens.Labels.HasLens' IndexReply'Endpoint "description"
            (Data.Text.Text)
          where
         lensOf' _
@@ -795,12 +834,6 @@ instance Prelude.Functor f =>
               (Lens.Family2.Unchecked.lens _IndexReply'Endpoint'description
                  (\ x__ y__ -> x__{_IndexReply'Endpoint'description = y__}))
               Prelude.id
-instance Data.Default.Class.Default IndexReply'Endpoint where
-        def
-          = IndexReply'Endpoint{_IndexReply'Endpoint'path =
-                                  Data.ProtoLens.fieldDefault,
-                                _IndexReply'Endpoint'description = Data.ProtoLens.fieldDefault,
-                                _IndexReply'Endpoint'_unknownFields = ([])}
 instance Data.ProtoLens.Message IndexReply'Endpoint where
         messageName _ = Data.Text.pack "grpcbin.IndexReply.Endpoint"
         fieldsByTag
@@ -809,7 +842,7 @@ instance Data.ProtoLens.Message IndexReply'Endpoint where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.StringField ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Text.Text)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "path")))
                       :: Data.ProtoLens.FieldDescriptor IndexReply'Endpoint
                 description__field_descriptor
@@ -817,7 +850,7 @@ instance Data.ProtoLens.Message IndexReply'Endpoint where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.StringField ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Text.Text)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "description")))
                       :: Data.ProtoLens.FieldDescriptor IndexReply'Endpoint
               in
@@ -827,6 +860,18 @@ instance Data.ProtoLens.Message IndexReply'Endpoint where
         unknownFields
           = Lens.Family2.Unchecked.lens _IndexReply'Endpoint'_unknownFields
               (\ x__ y__ -> x__{_IndexReply'Endpoint'_unknownFields = y__})
+        defMessage
+          = IndexReply'Endpoint{_IndexReply'Endpoint'path =
+                                  Data.ProtoLens.fieldDefault,
+                                _IndexReply'Endpoint'description = Data.ProtoLens.fieldDefault,
+                                _IndexReply'Endpoint'_unknownFields = ([])}
+instance Control.DeepSeq.NFData IndexReply'Endpoint where
+        rnf
+          = \ x__ ->
+              Control.DeepSeq.deepseq (_IndexReply'Endpoint'_unknownFields x__)
+                (Control.DeepSeq.deepseq (_IndexReply'Endpoint'path x__)
+                   (Control.DeepSeq.deepseq (_IndexReply'Endpoint'description x__)
+                      (())))
 {- | Fields :
 
     * 'Proto.Protos.Grpcbin_Fields.code' @:: Lens' SpecificErrorRequest Data.Word.Word32@
@@ -837,15 +882,13 @@ data SpecificErrorRequest = SpecificErrorRequest{_SpecificErrorRequest'code
                                                  _SpecificErrorRequest'reason :: !Data.Text.Text,
                                                  _SpecificErrorRequest'_unknownFields ::
                                                  !Data.ProtoLens.FieldSet}
-                              deriving (Prelude.Show, Prelude.Eq, Prelude.Ord)
-instance (Lens.Labels.HasLens' f SpecificErrorRequest x a,
-          a ~ b) =>
-         Lens.Labels.HasLens f SpecificErrorRequest SpecificErrorRequest x a
-           b
-         where
-        lensOf = Lens.Labels.lensOf'
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f SpecificErrorRequest "code"
+                              deriving (Prelude.Eq, Prelude.Ord)
+instance Prelude.Show SpecificErrorRequest where
+        showsPrec _ __x __s
+          = Prelude.showChar '{'
+              (Prelude.showString (Data.ProtoLens.showMessageShort __x)
+                 (Prelude.showChar '}' __s))
+instance Lens.Labels.HasLens' SpecificErrorRequest "code"
            (Data.Word.Word32)
          where
         lensOf' _
@@ -853,8 +896,7 @@ instance Prelude.Functor f =>
               (Lens.Family2.Unchecked.lens _SpecificErrorRequest'code
                  (\ x__ y__ -> x__{_SpecificErrorRequest'code = y__}))
               Prelude.id
-instance Prelude.Functor f =>
-         Lens.Labels.HasLens' f SpecificErrorRequest "reason"
+instance Lens.Labels.HasLens' SpecificErrorRequest "reason"
            (Data.Text.Text)
          where
         lensOf' _
@@ -862,12 +904,6 @@ instance Prelude.Functor f =>
               (Lens.Family2.Unchecked.lens _SpecificErrorRequest'reason
                  (\ x__ y__ -> x__{_SpecificErrorRequest'reason = y__}))
               Prelude.id
-instance Data.Default.Class.Default SpecificErrorRequest where
-        def
-          = SpecificErrorRequest{_SpecificErrorRequest'code =
-                                   Data.ProtoLens.fieldDefault,
-                                 _SpecificErrorRequest'reason = Data.ProtoLens.fieldDefault,
-                                 _SpecificErrorRequest'_unknownFields = ([])}
 instance Data.ProtoLens.Message SpecificErrorRequest where
         messageName _ = Data.Text.pack "grpcbin.SpecificErrorRequest"
         fieldsByTag
@@ -876,7 +912,7 @@ instance Data.ProtoLens.Message SpecificErrorRequest where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.UInt32Field ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Word.Word32)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "code")))
                       :: Data.ProtoLens.FieldDescriptor SpecificErrorRequest
                 reason__field_descriptor
@@ -884,7 +920,7 @@ instance Data.ProtoLens.Message SpecificErrorRequest where
                       (Data.ProtoLens.ScalarField Data.ProtoLens.StringField ::
                          Data.ProtoLens.FieldTypeDescriptor Data.Text.Text)
                       (Data.ProtoLens.PlainField Data.ProtoLens.Optional
-                         (Lens.Labels.lensOf
+                         (Lens.Labels.lensOf'
                             ((Lens.Labels.proxy#) :: (Lens.Labels.Proxy#) "reason")))
                       :: Data.ProtoLens.FieldDescriptor SpecificErrorRequest
               in
@@ -894,6 +930,17 @@ instance Data.ProtoLens.Message SpecificErrorRequest where
         unknownFields
           = Lens.Family2.Unchecked.lens _SpecificErrorRequest'_unknownFields
               (\ x__ y__ -> x__{_SpecificErrorRequest'_unknownFields = y__})
+        defMessage
+          = SpecificErrorRequest{_SpecificErrorRequest'code =
+                                   Data.ProtoLens.fieldDefault,
+                                 _SpecificErrorRequest'reason = Data.ProtoLens.fieldDefault,
+                                 _SpecificErrorRequest'_unknownFields = ([])}
+instance Control.DeepSeq.NFData SpecificErrorRequest where
+        rnf
+          = \ x__ ->
+              Control.DeepSeq.deepseq (_SpecificErrorRequest'_unknownFields x__)
+                (Control.DeepSeq.deepseq (_SpecificErrorRequest'code x__)
+                   (Control.DeepSeq.deepseq (_SpecificErrorRequest'reason x__) (())))
 data GRPCBin = GRPCBin{}
                  deriving ()
 instance Data.ProtoLens.Service.Types.Service GRPCBin where

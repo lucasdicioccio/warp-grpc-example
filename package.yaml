@@ -24,10 +24,10 @@ dependencies:
 - bytestring
 - containers
 - data-default-class
-- http2-grpc-types
+- http2-grpc-types >= 0.3
 - lens
-- proto-lens
-- proto-lens-protoc
+- proto-lens >= 0.4
+- proto-lens-runtime >= 0.4
 - warp
 - warp-grpc >= 0.1.0.3
 - warp-tls
