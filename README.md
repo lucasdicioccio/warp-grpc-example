@@ -1,3 +1,8 @@
+# THIS REPO IS MOVING
+
+NOTE: we'll be moving the code in this repository to https://github.com/haskell-grpc-native .
+
+
 # warp-grpc-example
 
 You need a TLS certificate to run this example.
