@@ -5,4 +5,6 @@ allow-newer:
  , warp-grpc:http2
  , proto-lens:bytestring
  , proto-lens-runtime:bytestring
+ , http2-grpc-proto-lens:bytestring
+ , http2-grpc-proto-lens:proto-lens
  , http2-grpc-types:bytestring

@@ -9,11 +9,12 @@ import Control.Lens
 import Control.Concurrent (threadDelay)
 import Control.Monad (void)
 import Data.ProtoLens.Message (defMessage)
+import Data.ProtoLens.Service.Types (HasMethodImpl (..))
 import Network.Wai.Handler.WarpTLS (defaultTlsSettings)
 import Network.Wai.Handler.Warp (defaultSettings)
-import Network.GRPC.HTTP2.Types (RPC(..))
+import Network.GRPC.HTTP2.ProtoLens (RPC (..))
 import Network.GRPC.HTTP2.Encoding (gzip)
-import Proto.Protos.Grpcbin (GRPCBin)
+import Proto.Protos.Grpcbin (GRPCBin, DummyMessage, EmptyMessage, IndexReply, SpecificErrorRequest)
 import Proto.Protos.Grpcbin_Fields
 import System.Environment (getArgs)
 
@@ -36,7 +37,7 @@ handlers args =
       else generalStream (RPC :: RPC GRPCBin "dummyBidirectionalStreamStream") handleDummyBiDiGeneralStream
   ]
 
-handleIndex :: UnaryHandler GRPCBin "index"
+handleIndex :: UnaryHandler IO EmptyMessage IndexReply
 handleIndex _ input = do
     print ("index"::[Char], input)
     return $ defMessage & description .~ "desc"
@@ -44,26 +45,26 @@ handleIndex _ input = do
                                                       & description .~ "ill-supported"
                                          ]
 
-handleEmpty :: UnaryHandler GRPCBin "empty"
+handleEmpty :: UnaryHandler IO EmptyMessage EmptyMessage
 handleEmpty _ input = do
     print ("empty"::[Char], input)
     return $ defMessage
 
-handleSpecificError :: UnaryHandler GRPCBin "specificError"
+handleSpecificError :: UnaryHandler IO SpecificErrorRequest EmptyMessage
 handleSpecificError _ input = do
     print ("specificError"::[Char], input)
     _ <- throwIO $ GRPCStatus INTERNAL "noo"
     return $ defMessage
 
-handleRandomError :: UnaryHandler GRPCBin "randomError"
+handleRandomError :: UnaryHandler IO EmptyMessage EmptyMessage
 handleRandomError _ input = do
     print ("randomError"::[Char], input)
     return $ defMessage
 
-handleDummyUnary :: UnaryHandler GRPCBin "dummyUnary"
+handleDummyUnary :: UnaryHandler IO DummyMessage DummyMessage
 handleDummyUnary _ input = pure input
 
-handleDummyServerStream :: ServerStreamHandler GRPCBin "dummyServerStream" Int
+handleDummyServerStream :: ServerStreamHandler IO DummyMessage DummyMessage Int
 handleDummyServerStream _ input = do
     print ("sstream-start"::[Char], input)
     return $ (10, ServerStream $ \n -> do
@@ -74,14 +75,14 @@ handleDummyServerStream _ input = do
             print ("sstream-msg"::[Char], n)
             return $ Just (n-1, defMessage))
 
-handleDummyClientStream :: ClientStreamHandler GRPCBin "dummyClientStream" Int
+handleDummyClientStream :: ClientStreamHandler IO DummyMessage DummyMessage Int
 handleDummyClientStream _ = do
     print ("cstream-start"::[Char])
     return $ (0, ClientStream
                      (\n input -> print ("cstream-msg"::[Char], n, input) >> return (n+1))
                      (\n -> print ("cstream-end"::[Char], n) >> return defMessage))
 
-handleDummyBiDiStreamStep :: BiDiStreamHandler GRPCBin "dummyBidirectionalStreamStream" Int
+handleDummyBiDiStreamStep :: BiDiStreamHandler IO DummyMessage DummyMessage Int
 handleDummyBiDiStreamStep _ = do
     print ("bidistream-start"::[Char])
     return $ (10, BiDiStream go)
@@ -94,7 +95,7 @@ handleDummyBiDiStreamStep _ = do
                 print ("bidistream-out"::[Char], n)
                 pure $ WriteOutput (n -1) defMessage
 
-handleDummyBiDiGeneralStream :: GeneralStreamHandler GRPCBin "dummyBidirectionalStreamStream" Int Int
+handleDummyBiDiGeneralStream :: GeneralStreamHandler IO DummyMessage DummyMessage Int Int
 handleDummyBiDiGeneralStream _ = do
     print ("general-bidistream-start"::[Char])
     return (0, incoming, 10, outgoing)

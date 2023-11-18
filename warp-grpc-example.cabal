@@ -25,6 +25,7 @@ common deps
     , bytestring
     , containers
     , data-default-class
+    , http2-grpc-proto-lens
     , http2-grpc-types >= 0.3
     , lens
     , proto-lens >= 0.4
